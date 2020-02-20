@@ -23,6 +23,8 @@ set -x
 
 CACHE_DIR=/nvidia-device-plugin
 
+apt-get update
+
 apt-get install -y -q --no-install-recommends libxml2
 apt-get install -y -q --no-install-recommends libxml2-dev
 

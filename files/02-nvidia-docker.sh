@@ -34,11 +34,12 @@ apt-get purge -y nvidia-docker || true
 #######################################
 # Add package repositories
 
+distribution_codename=$(. /etc/os-release;echo $ID-$VERSION_CODENAME)
+
 # Add the package repository for docker-ce
-curl -fsSL https://download.docker.com/linux/debian/gpg | \
-  apt-key add -
-echo 'deb [arch=amd64] https://download.docker.com/linux/debian stretch stable' | \
-  tee /etc/apt/sources.list.d/docker-ce.list
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
 
 # Add the package repository for nvidia-docker
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
@@ -70,7 +71,7 @@ apt-get -y update
 apt-get install -y --allow-downgrades -o Dpkg::Options::="--force-confold" \
   nvidia-docker2=2.0.3+docker18.09.4-1 \
   nvidia-container-runtime=2.0.0+docker18.09.4-1 \
-  docker-ce=5:18.09.4~3-0~debian-stretch
+  docker-ce=5:18.09.4~3-0~$distribution_codename
 
 # Disable a few things that break docker-ce/gpu support upon reboot:
 #  Upon boot, the kops-configuration.service systemd unit sets up and starts
