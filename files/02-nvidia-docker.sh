@@ -34,13 +34,6 @@ apt-get purge -y nvidia-docker || true
 #######################################
 # Add package repositories
 
-distribution_codename=$(. /etc/os-release;echo $ID-$VERSION_CODENAME)
-
-# Add the package repository for docker-ce
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-
 # Add the package repository for nvidia-docker
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
   apt-key add -
@@ -58,8 +51,7 @@ cat << 'EOF' > /etc/docker/daemon.json
             "path": "/usr/bin/nvidia-container-runtime",
             "runtimeArgs": []
         }
-    },
-    "storage-driver": "overlay"
+    }
 }
 EOF
 
@@ -69,14 +61,7 @@ EOF
 apt-get -y update
 # pin versions https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-20-if-im-not-using-the-latest-docker-version
 apt-get install -y --allow-downgrades -o Dpkg::Options::="--force-confold" \
-  nvidia-docker2=2.0.3+docker18.09.4-1 \
-  nvidia-container-runtime=2.0.0+docker18.09.4-1 \
-  docker-ce=5:18.09.4~3-0~$distribution_codename
+  nvidia-docker2=2.3.0-1 \
+  nvidia-container-runtime=3.2.0-1
 
-# Disable a few things that break docker-ce/gpu support upon reboot:
-#  Upon boot, the kops-configuration.service systemd unit sets up and starts
-#  the cloud-init.service which runs nodeup which forces docker-ce to a
-#  specific version that is a downgrade and incompatible with nvidia-docker2.
-#  Permanently disable these systemd units via masking.
-systemctl mask cloud-init.service
-systemctl mask kops-configuration.service
+systemctl restart docker || true
