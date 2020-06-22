@@ -40,18 +40,18 @@ apt-get install -y -q --no-install-recommends libxml2-dev
 declare -A class_to_driver_file
 class_to_driver_file=( \
     ["g2"]="http://us.download.nvidia.com/XFree86/Linux-x86_64/367.124/NVIDIA-Linux-x86_64-367.124.run" \
-    ["p2"]="http://us.download.nvidia.com/tesla/418.40.04/NVIDIA-Linux-x86_64-418.40.04.run" \
-    ["g3"]="http://us.download.nvidia.com/tesla/418.40.04/NVIDIA-Linux-x86_64-418.40.04.run" \
-    ["g3s"]="http://us.download.nvidia.com/tesla/418.40.04/NVIDIA-Linux-x86_64-418.40.04.run" \
-    ["p3"]="http://us.download.nvidia.com/tesla/418.40.04/NVIDIA-Linux-x86_64-418.40.04.run"
+    ["p2"]="http://us.download.nvidia.com/tesla/418.126.02/NVIDIA-Linux-x86_64-418.126.02.run" \
+    ["g3"]="http://us.download.nvidia.com/tesla/418.126.02/NVIDIA-Linux-x86_64-418.126.02.run" \
+    ["g3s"]="http://us.download.nvidia.com/tesla/418.126.02/NVIDIA-Linux-x86_64-418.126.02.run" \
+    ["p3"]="http://us.download.nvidia.com/tesla/418.126.02/NVIDIA-Linux-x86_64-418.126.02.run"
 )
 declare -A class_to_driver_checksum
 class_to_driver_checksum=( \
     ["g2"]="77f37939efeea4b6505842bed50445971992e303" \
-    ["p2"]="fe7842869eb0b4d8f30fb554c11d613312f96245" \
-    ["g3"]="fe7842869eb0b4d8f30fb554c11d613312f96245" \
-    ["g3s"]="fe7842869eb0b4d8f30fb554c11d613312f96245" \
-    ["p3"]="fe7842869eb0b4d8f30fb554c11d613312f96245"
+    ["p2"]="f3452952ae36ab658809c44b262feb3d37361cc8" \
+    ["g3"]="f3452952ae36ab658809c44b262feb3d37361cc8" \
+    ["g3s"]="f3452952ae36ab658809c44b262feb3d37361cc8" \
+    ["p3"]="f3452952ae36ab658809c44b262feb3d37361cc8"
 )
 
 # CUDA Files that need to be installed ~1.4GB
